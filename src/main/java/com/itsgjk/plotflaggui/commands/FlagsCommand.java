@@ -7,8 +7,11 @@
 
 package com.itsgjk.plotflaggui.commands;
 
+import com.github.intellectualsites.plotsquared.plot.flag.Flags;
+import com.github.intellectualsites.plotsquared.plot.object.Plot;
 import com.itsgjk.plotflaggui.PlotFlagGui;
 import com.itsgjk.plotflaggui.util.Checks;
+import com.itsgjk.plotflaggui.util.PlotUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -25,7 +28,21 @@ public class FlagsCommand extends Command {
         if(!Checks.checkConsole(sender)) return true;
         if(!Checks.checkPermission(sender, permission)) return true;
 
+        Player player = (Player)sender;
+        Plot plot = PlotUtil.getPlot(player.getLocation());
 
+        if(plot==null){
+            plugin.getLocaleManager().getMessage("not-in-plot");
+            return true;
+        }
+
+        if(!plot.getOwners().contains(player.getUniqueId())||!plot.getTrusted().contains(player.getUniqueId())){
+            plugin.getLocaleManager().getMessage("not-trusted-on-plot");
+            return true;
+        }
+
+
+        plot.getFlag(Flags.BREAK.)
 
         return true;
     }

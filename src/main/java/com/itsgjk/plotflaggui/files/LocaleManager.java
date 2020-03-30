@@ -10,7 +10,6 @@ package com.itsgjk.plotflaggui.files;
 import com.itsgjk.plotflaggui.PlotFlagGui;
 import org.bukkit.ChatColor;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class LocaleManager {
@@ -18,14 +17,16 @@ public class LocaleManager {
     PlotFlagGui plugin;
     ConfigManager config;
     Map<String, String> loadedLocale;
+    String prefix;
 
     public LocaleManager(PlotFlagGui plugin){
         this.plugin = plugin;
         this.config = new ConfigManager(plugin, "locale.yml");
+        prefix = config.getConfig().getString("prefix");
 
         Map<String, Object> vals = config.getConfig().getDefaultSection().getValues(false);
         for(String key : vals.keySet()){
-            loadedLocale.put(key, ChatColor.translateAlternateColorCodes('&', vals.get(key).toString()));
+            loadedLocale.put(key, ChatColor.translateAlternateColorCodes('&', vals.get(key).toString().replaceAll("%prefix%", prefix)));
         }
     }
 

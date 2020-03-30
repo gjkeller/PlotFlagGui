@@ -8,6 +8,8 @@
 package com.itsgjk.plotflaggui;
 
 import com.itsgjk.plotflaggui.commands.Command;
+import com.itsgjk.plotflaggui.commands.FlagsCommand;
+import com.itsgjk.plotflaggui.events.GuiListener;
 import com.itsgjk.plotflaggui.files.LocaleManager;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -20,12 +22,19 @@ public final class PlotFlagGui extends JavaPlugin {
     private static PlotFlagGui instance;
     ArrayList<Command> commands;
     LocaleManager localeManager;
+    GuiListener guiListener;
 
     @Override
     public void onEnable() {
         getLogger().info("Loading PlotFlagGui");
         instance = this;
         this.localeManager = new LocaleManager(this);
+        guiListener = new GuiListener(this);
+        getServer().getPluginManager().registerEvents(guiListener, this);
+
+        FlagsCommand flags = new FlagsCommand(this);
+        commands.add(flags);
+        getCommand("flags").setTabCompleter(flags);
     }
 
     @Override
@@ -60,5 +69,9 @@ public final class PlotFlagGui extends JavaPlugin {
 
     public static PlotFlagGui getInstance() {
         return instance;
+    }
+
+    public GuiListener getGuiListener() {
+        return guiListener;
     }
 }
