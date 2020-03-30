@@ -1,0 +1,11 @@
+name: PlotFlagGui
+version: ${project.version}
+main: com.itsgjk.plotflaggui.PlotFlagGui
+api-version: 1.13
+authors: [ItsGJK]
+description: Allows individuals to edit PlotSquared flags through the use of a GUI!
+depend: [PlotSquared]
+commands:
+  flags:
+    description: Opens a GUI for the plot's flags!
+    usage: /<command>

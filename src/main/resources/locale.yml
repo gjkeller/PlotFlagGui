@@ -1,0 +1,7 @@
+# PlotFlagGui Localization
+# Save a copy of this file or make edits with caution. View the plugin page if you need the default copy of this file.
+# The plugin prefix: this can be ppended with %prefix%
+prefix: '&8[&6Flags&8]'
+no-permission: '%prefix% &cYou do not have permission to use this command.'
+true: '&aOn'
+false: '&cOff'
